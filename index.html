@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,8 +16,8 @@
         }
 
         body {
-            background-color: #020604;
-            color: #00ff66;
+            background-color: #000000;
+            color: #ff3333;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -28,7 +28,7 @@
             position: relative;
         }
 
-        /* Matrix Canvas Background */
+        /* Red Matrix Canvas Background */
         canvas {
             position: fixed;
             top: 0;
@@ -36,31 +36,38 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0.25;
+            opacity: 0.4;
             pointer-events: none;
         }
 
         .terminal-box {
-            background: rgba(2, 15, 5, 0.95);
-            border: 2px solid #00ff66;
+            background: rgba(10, 0, 0, 0.95);
+            border: 2px solid #ff3333;
             max-width: 600px;
             width: 100%;
             padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0, 255, 102, 0.4);
+            border-radius: 6px;
+            box-shadow: 0 0 40px rgba(255, 51, 51, 0.6), inset 0 0 20px rgba(255, 51, 51, 0.2);
             position: relative;
             z-index: 2;
+            animation: glitch-border 2s infinite;
+        }
+
+        @keyframes glitch-border {
+            0% { border-color: #ff3333; box-shadow: 0 0 40px rgba(255, 51, 51, 0.6); }
+            50% { border-color: #ff9900; box-shadow: 0 0 60px rgba(255, 153, 0, 0.8); }
+            100% { border-color: #ff3333; box-shadow: 0 0 40px rgba(255, 51, 51, 0.6); }
         }
 
         .terminal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #00ff66;
+            border-bottom: 1px dashed #ff3333;
             padding-bottom: 10px;
             margin-bottom: 20px;
-            font-size: 14px;
-            color: #00ff66;
+            font-size: 13px;
+            color: #ff3333;
         }
 
         .dots {
@@ -74,9 +81,9 @@
             border-radius: 50%;
         }
 
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27c93f; }
+        .dot-red { background: #ff5f56; box-shadow: 0 0 10px #ff5f56; }
+        .dot-yellow { background: #ffbd2e; box-shadow: 0 0 10px #ffbd2e; }
+        .dot-green { background: #27c93f; box-shadow: 0 0 10px #27c93f; }
 
         .profile-section {
             text-align: center;
@@ -84,51 +91,55 @@
         }
 
         h1 {
-            font-size: 24px;
-            letter-spacing: 3px;
+            font-size: 28px;
+            letter-spacing: 4px;
             margin-bottom: 5px;
             color: #ffffff;
-            text-shadow: 0 0 10px #00ff66;
+            text-shadow: 0 0 15px #ff3333, 0 0 30px #ff0000;
         }
 
         .status {
             font-size: 13px;
-            color: #ffbd2e;
+            color: #ff9900;
             margin-bottom: 15px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px #ff9900;
         }
 
-        /* Search Box Styles */
+        /* Attack / Search Box Styles */
         .search-box {
-            background: rgba(0, 255, 102, 0.05);
-            border: 1px dashed #00ff66;
+            background: rgba(255, 51, 51, 0.05);
+            border: 1px solid #ff3333;
             padding: 15px;
-            border-radius: 6px;
+            border-radius: 4px;
             margin-bottom: 20px;
+            box-shadow: inset 0 0 15px rgba(255, 51, 51, 0.2);
         }
 
         .search-box label {
             display: block;
             font-size: 13px;
-            color: #00ff66;
+            color: #ff3333;
             margin-bottom: 8px;
         }
 
         .search-input {
             width: 100%;
             background: #000;
-            border: 1px solid #00ff66;
-            color: #00ff66;
+            border: 1px solid #ff3333;
+            color: #ff3333;
             padding: 12px;
             font-family: 'Share Tech Mono', monospace;
             font-size: 15px;
             border-radius: 4px;
             outline: none;
             margin-bottom: 12px;
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
         }
 
         .search-input:focus {
-            box-shadow: 0 0 10px #00ff66;
+            box-shadow: 0 0 25px #ff3333;
+            border-color: #fff;
         }
 
         .search-btn-grid {
@@ -138,31 +149,32 @@
         }
 
         .s-btn {
-            background: #00ff66;
-            border: none;
-            color: #020604;
+            background: rgba(255, 51, 51, 0.15);
+            border: 1px solid #ff3333;
+            color: #ff3333;
             padding: 10px 5px;
             font-family: 'Share Tech Mono', monospace;
             font-size: 13px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
-            transition: 0.2s;
+            transition: 0.3s;
             text-align: center;
         }
 
         .s-btn:hover {
-            background: #fff;
-            box-shadow: 0 0 15px #fff;
+            background: #ff3333;
+            color: #000;
+            box-shadow: 0 0 25px #ff3333;
         }
 
         .section-title {
             font-size: 14px;
-            color: #ffbd2e;
+            color: #ff9900;
             margin: 20px 0 10px 0;
-            border-bottom: 1px solid rgba(255, 189, 46, 0.3);
+            border-bottom: 1px dashed rgba(255, 153, 0, 0.4);
             padding-bottom: 5px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .links-container {
@@ -175,46 +187,86 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: transparent;
-            color: #00ff66;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ff3333;
             text-decoration: none;
             padding: 12px 15px;
-            border: 1px solid #00ff66;
+            border: 1px solid #ff3333;
             border-radius: 4px;
             font-size: 14px;
             letter-spacing: 1px;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         .btn-link:hover {
-            background: #00ff66;
-            color: #020604;
-            box-shadow: 0 0 15px #00ff66;
+            background: #ff3333;
+            color: #000000;
+            box-shadow: 0 0 25px #ff3333;
         }
 
         .btn-recovery {
-            border-color: #ffbd2e;
-            color: #ffbd2e;
+            border-color: #ff9900;
+            color: #ff9900;
         }
 
         .btn-recovery:hover {
-            background: #ffbd2e;
-            color: #020604;
-            box-shadow: 0 0 15px #ffbd2e;
+            background: #ff9900;
+            color: #000000;
+            box-shadow: 0 0 25px #ff9900;
+        }
+
+        /* Hacker Execution Terminal Screen Overlay */
+        #breachOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            padding: 30px;
+            color: #ff3333;
+            font-family: 'Share Tech Mono', monospace;
+            overflow: hidden;
+        }
+
+        .breach-header {
+            font-size: 22px;
+            color: #ff0000;
+            text-shadow: 0 0 15px #ff0000;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ff0000;
+            padding-bottom: 10px;
+        }
+
+        .breach-logs {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #ff6666;
+            white-space: pre-wrap;
         }
 
         footer {
             margin-top: 20px;
             text-align: center;
-            font-size: 12px;
-            color: #009933;
+            font-size: 11px;
+            color: #ff3333;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Matrix Rain Background Effect -->
+    <!-- Red Matrix Rain Background -->
     <canvas id="matrixCanvas"></canvas>
+
+    <!-- Breach Simulation Screen -->
+    <div id="breachOverlay">
+        <div class="breach-header">[!] ALERT: SYSTEM BREACH INITIATED [!]</div>
+        <div class="breach-logs" id="breachLogs"></div>
+    </div>
 
     <div class="terminal-box">
         <div class="terminal-header">
@@ -228,21 +280,21 @@
 
         <div class="profile-section">
             <h1>RAHUL MEENA</h1>
-            <div class="status">[ SYSTEM ACCESS: AUTHORIZED ]</div>
+            <div class="status">[ SYSTEM ACCESS: COMPROMISED ]</div>
         </div>
 
-        <!-- Target Username Search Module -->
+        <!-- Target Username Attack Module -->
         <div class="search-box">
             <label>> ENTER TARGET USERNAME:</label>
-            <input type="text" id="targetUsername" class="search-input" placeholder="e.g. username">
+            <input type="text" id="targetUsername" class="search-input" placeholder="e.g. target_username">
             <div class="search-btn-grid">
-                <button class="s-btn" onclick="searchPlatform('instagram')">INSTAGRAM</button>
-                <button class="s-btn" onclick="searchPlatform('facebook')">FACEBOOK</button>
-                <button class="s-btn" onclick="searchPlatform('snapchat')">SNAPCHAT</button>
+                <button class="s-btn" onclick="triggerBreach('INSTAGRAM')">INSTAGRAM</button>
+                <button class="s-btn" onclick="triggerBreach('FACEBOOK')">FACEBOOK</button>
+                <button class="s-btn" onclick="triggerBreach('SNAPCHAT')">SNAPCHAT</button>
             </div>
         </div>
 
-        <!-- Official Recovery Links -->
+        <!-- Official Recovery Modules -->
         <div class="section-title">> OFFICIAL_RECOVERY_MODULES:</div>
         <div class="links-container">
             <a href="https://www.instagram.com/hacked/" target="_blank" class="btn-link btn-recovery">
@@ -259,7 +311,7 @@
             </a>
         </div>
 
-        <!-- Creator Links -->
+        <!-- System Links -->
         <div class="section-title">> SYSTEM_LINKS:</div>
         <div class="links-container">
             <a href="https://youtube.com" target="_blank" class="btn-link">
@@ -273,62 +325,90 @@
         </div>
 
         <footer>
-            SECURE TERMINAL // DESIGNED BY RAHUL MEENA
+            WARNING: AUTHORIZED ACCESS ONLY - PROSECUTION IS CERTAIN // DESIGNED BY RAHUL MEENA
         </footer>
     </div>
 
     <script>
-        // Matrix Rain Effect Script
+        // Red Matrix Rain Script
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const katakana = 'AblXYZ0123456789@#$%^&*()';
-        const alphabet = katakana.split('');
-
-        const fontSize = 14;
+        const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()+-<>/?~';
+        const fontSize = 16;
         const columns = canvas.width / fontSize;
 
-        const rainDrops = [];
+        const drops = [];
         for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
+            drops[x] = 1;
         }
 
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(2, 6, 4, 0.05)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = '#00ff66';
+            ctx.fillStyle = '#ff3333';
             ctx.font = fontSize + 'px monospace';
 
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
                 }
-                rainDrops[i]++;
+                drops[i]++;
             }
         }
-        setInterval(drawMatrix, 30);
+        setInterval(drawMatrix, 33);
 
-        function searchPlatform(platform) {
+        // Real Hacker Breach Simulation Logic
+        function triggerBreach(platform) {
             let username = document.getElementById('targetUsername').value.trim();
             if(!username) {
-                alert("Pehle target username enter karo!");
+                alert("ERROR: Target username required for exploit execution!");
                 return;
             }
 
-            if(platform === 'instagram') {
-                window.open(`https://www.instagram.com/${username}/`, '_blank');
-            } else if(platform === 'facebook') {
-                window.open(`https://www.facebook.com/public/${username}`, '_blank');
-            } else if(platform === 'snapchat') {
-                window.open(`https://www.snapchat.com/add/${username}`, '_blank');
+            const overlay = document.getElementById('breachOverlay');
+            const logsBox = document.getElementById('breachLogs');
+            overlay.style.display = 'flex';
+            
+            let logs = [
+                `> Connecting to ${platform} secure mainframe for target: @${username}...`,
+                `> Bypassing SSL encryption layers and firewall nodes...`,
+                `> Injecting payload into session token database...`,
+                `> [SUCCESS] Target packet captured: @${username}`,
+                `> Extracting user credentials and access tokens...`,
+                `> WARNING: SYSTEM INTEGRITY COMPROMISED // ID COMPROMISED!`,
+                `> Redirecting to secure recovery portal in 3 seconds...`
+            ];
+
+            let currentLog = 0;
+            logsBox.innerHTML = "";
+
+            function addLogLine() {
+                if(currentLog < logs.length) {
+                    logsBox.innerHTML += logs[currentLog] + "\n";
+                    currentLog++;
+                    setTimeout(addLogLine, 600);
+                } else {
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        if(platform === 'INSTAGRAM') {
+                            window.open(`https://www.instagram.com/${username}/`, '_blank');
+                        } else if(platform === 'FACEBOOK') {
+                            window.open(`https://www.facebook.com/public/${username}`, '_blank');
+                        } else if(platform === 'SNAPCHAT') {
+                            window.open(`https://www.snapchat.com/add/${username}`, '_blank');
+                        }
+                    }, 1200);
+                }
             }
+            addLogLine();
         }
     </script>
 
