@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Meena | Recovery Terminal</title>
+    <!-- Google Fonts for Hacker Style -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        body {
+            background-color: #050505;
+            color: #00ff66;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Scanline effect for hacker vibe */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        .terminal-box {
+            background: rgba(10, 15, 10, 0.95);
+            border: 1px solid #00ff66;
+            max-width: 580px;
+            width: 100%;
+            padding: 25px;
+            border-radius: 6px;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.2);
+            position: relative;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed #00ff66;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #00cc52;
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 3px;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+        }
+
+        .status {
+            font-size: 12px;
+            color: #00ff66;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            color: #ffbd2e;
+            margin: 15px 0 8px 0;
+            border-bottom: 1px solid rgba(255, 189, 46, 0.3);
+            padding-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        /* Search Box Styles */
+        .search-box {
+            background: rgba(0, 255, 102, 0.05);
+            border: 1px solid #00ff66;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .search-box label {
+            display: block;
+            font-size: 12px;
+            color: #00ff66;
+            margin-bottom: 6px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: #050505;
+            border: 1px solid #00ff66;
+            color: #00ff66;
+            padding: 10px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            border-radius: 3px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .search-input::placeholder {
+            color: rgba(0, 255, 102, 0.4);
+        }
+
+        .search-btn-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .s-btn {
+            background: transparent;
+            border: 1px solid #ffbd2e;
+            color: #ffbd2e;
+            padding: 8px 5px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .s-btn:hover {
+            background: #ffbd2e;
+            color: #050505;
+            box-shadow: 0 0 10px #ffbd2e;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: transparent;
+            color: #00ff66;
+            text-decoration: none;
+            padding: 10px 12px;
+            border: 1px solid #00ff66;
+            border-radius: 4px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-link:hover {
+            background: #00ff66;
+            color: #050505;
+            box-shadow: 0 0 12px #00ff66;
+        }
+
+        .btn-recovery {
+            border-color: #ffbd2e;
+            color: #ffbd2e;
+        }
+
+        .btn-recovery:hover {
+            background: #ffbd2e;
+            color: #050505;
+            box-shadow: 0 0 12px #ffbd2e;
+        }
+
+        footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 11px;
+            color: #009933;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-box">
+        <div class="terminal-header">
+            <div class="dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+            </div>
+            <span>root@rahul-meena:~/target-lookup#</span>
+        </div>
+
+        <div class="profile-section">
+            <h1>RAHUL MEENA</h1>
+            <div class="status">[ SYSTEM RECOVERY & LOOKUP PORTAL ]</div>
+        </div>
+
+        <!-- Username Search Module -->
+        <div class="search-box">
+            <label>> ENTER TARGET USERNAME:</label>
+            <input type="text" id="targetUsername" class="search-input" placeholder="e.g. rahul_meena">
+            <div class="search-btn-grid">
+                <button class="s-btn" onclick="searchPlatform('instagram')">INSTAGRAM</button>
+                <button class="s-btn" onclick="searchPlatform('facebook')">FACEBOOK</button>
+                <button class="s-btn" onclick="searchPlatform('snapchat')">SNAPCHAT</button>
+            </div>
+        </div>
+
+        <!-- Official Recovery Direct Links -->
+        <div class="section-title">> OFFICIAL_RECOVERY_LINKS:</div>
+        <div class="links-container">
+            <a href="https://www.instagram.com/hacked/" target="_blank" class="btn-link btn-recovery">
+                <span><i class="fab fa-instagram"></i> INSTAGRAM HACKED HELP</span>
+                <span>[ OPEN ]</span>
+            </a>
+            <a href="https://www.facebook.com/login/identify" target="_blank" class="btn-link btn-recovery">
+                <span><i class="fab fa-facebook"></i> FACEBOOK RECOVERY ID</span>
+                <span>[ OPEN ]</span>
+            </a>
+            <a href="https://support.snapchat.com/" target="_blank" class="btn-link btn-recovery">
+                <span><i class="fab fa-snapchat"></i> SNAPCHAT SUPPORT</span>
+                <span>[ OPEN ]</span>
+            </a>
+        </div>
+
+        <!-- Creator Links -->
+        <div class="section-title">> CREATOR_HUB:</div>
+        <div class="links-container">
+            <a href="https://youtube.com" target="_blank" class="btn-link">
+                <span><i class="fab fa-youtube"></i> 8D ACTIVE CHANNEL</span>
+                <span>[ VIEW ]</span>
+            </a>
+            <a href="https://github.com" target="_blank" class="btn-link">
+                <span><i class="fab fa-github"></i> GITHUB REPOSITORIES</span>
+                <span>[ VIEW ]</span>
+            </a>
+        </div>
+
+        <footer>
+            SECURE PORTAL // DESIGNED BY RAHUL MEENA
+        </footer>
+    </div>
+
+    <script>
+        function searchPlatform(platform) {
+            let username = document.getElementById('targetUsername').value.trim();
+            if(!username) {
+                alert("Pehle target username enter karo!");
+                return;
+            }
+
+            if(platform === 'instagram') {
+                window.open(`https://www.instagram.com/${username}/`, '_blank');
+            } else if(platform === 'facebook') {
+                window.open(`https://www.facebook.com/public/${username}`, '_blank');
+            } else if(platform === 'snapchat') {
+                window.open(`https://www.snapchat.com/add/${username}`, '_blank');
+            }
+        }
+    </script>
+
+</body>
+</html>
