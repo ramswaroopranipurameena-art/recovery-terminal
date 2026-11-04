@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahul Meena | Recovery Terminal</title>
-    <!-- Google Fonts for Hacker Style -->
+    <title>Rahul Meena | Elite Cyber Terminal</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -17,7 +16,7 @@
         }
 
         body {
-            background-color: #050505;
+            background-color: #020604;
             color: #00ff66;
             min-height: 100vh;
             display: flex;
@@ -29,38 +28,39 @@
             position: relative;
         }
 
-        /* Scanline effect for hacker vibe */
-        body::before {
-            content: " ";
-            display: block;
+        /* Matrix Canvas Background */
+        canvas {
             position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 999;
-            background-size: 100% 4px, 6px 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.25;
             pointer-events: none;
         }
 
         .terminal-box {
-            background: rgba(10, 15, 10, 0.95);
-            border: 1px solid #00ff66;
-            max-width: 580px;
+            background: rgba(2, 15, 5, 0.95);
+            border: 2px solid #00ff66;
+            max-width: 600px;
             width: 100%;
             padding: 25px;
-            border-radius: 6px;
-            box-shadow: 0 0 25px rgba(0, 255, 102, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.4);
             position: relative;
+            z-index: 2;
         }
 
         .terminal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px dashed #00ff66;
+            border-bottom: 1px solid #00ff66;
             padding-bottom: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 14px;
-            color: #00cc52;
+            color: #00ff66;
         }
 
         .dots {
@@ -80,94 +80,95 @@
 
         .profile-section {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         h1 {
-            font-size: 20px;
-            letter-spacing: 2px;
-            margin-bottom: 3px;
+            font-size: 24px;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
             color: #ffffff;
-            text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+            text-shadow: 0 0 10px #00ff66;
         }
 
         .status {
-            font-size: 12px;
-            color: #00ff66;
-            margin-bottom: 10px;
-        }
-
-        .section-title {
             font-size: 13px;
             color: #ffbd2e;
-            margin: 15px 0 8px 0;
-            border-bottom: 1px solid rgba(255, 189, 46, 0.3);
-            padding-bottom: 4px;
+            margin-bottom: 15px;
             letter-spacing: 1px;
         }
 
         /* Search Box Styles */
         .search-box {
             background: rgba(0, 255, 102, 0.05);
-            border: 1px solid #00ff66;
-            padding: 12px;
-            border-radius: 4px;
-            margin-bottom: 15px;
+            border: 1px dashed #00ff66;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
         }
 
         .search-box label {
             display: block;
-            font-size: 12px;
+            font-size: 13px;
             color: #00ff66;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .search-input {
             width: 100%;
-            background: #050505;
+            background: #000;
             border: 1px solid #00ff66;
             color: #00ff66;
-            padding: 10px;
+            padding: 12px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 14px;
-            border-radius: 3px;
+            font-size: 15px;
+            border-radius: 4px;
             outline: none;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .search-input::placeholder {
-            color: rgba(0, 255, 102, 0.4);
+        .search-input:focus {
+            box-shadow: 0 0 10px #00ff66;
         }
 
         .search-btn-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
 
         .s-btn {
-            background: transparent;
-            border: 1px solid #ffbd2e;
-            color: #ffbd2e;
-            padding: 8px 5px;
+            background: #00ff66;
+            border: none;
+            color: #020604;
+            padding: 10px 5px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: bold;
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: 4px;
             transition: 0.2s;
             text-align: center;
         }
 
         .s-btn:hover {
-            background: #ffbd2e;
-            color: #050505;
-            box-shadow: 0 0 10px #ffbd2e;
+            background: #fff;
+            box-shadow: 0 0 15px #fff;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: #ffbd2e;
+            margin: 20px 0 10px 0;
+            border-bottom: 1px solid rgba(255, 189, 46, 0.3);
+            padding-bottom: 5px;
+            letter-spacing: 1px;
         }
 
         .links-container {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn-link {
@@ -177,18 +178,18 @@
             background: transparent;
             color: #00ff66;
             text-decoration: none;
-            padding: 10px 12px;
+            padding: 12px 15px;
             border: 1px solid #00ff66;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 14px;
             letter-spacing: 1px;
             transition: all 0.2s ease-in-out;
         }
 
         .btn-link:hover {
             background: #00ff66;
-            color: #050505;
-            box-shadow: 0 0 12px #00ff66;
+            color: #020604;
+            box-shadow: 0 0 15px #00ff66;
         }
 
         .btn-recovery {
@@ -198,19 +199,22 @@
 
         .btn-recovery:hover {
             background: #ffbd2e;
-            color: #050505;
-            box-shadow: 0 0 12px #ffbd2e;
+            color: #020604;
+            box-shadow: 0 0 15px #ffbd2e;
         }
 
         footer {
-            margin-top: 15px;
+            margin-top: 20px;
             text-align: center;
-            font-size: 11px;
+            font-size: 12px;
             color: #009933;
         }
     </style>
 </head>
 <body>
+
+    <!-- Matrix Rain Background Effect -->
+    <canvas id="matrixCanvas"></canvas>
 
     <div class="terminal-box">
         <div class="terminal-header">
@@ -219,18 +223,18 @@
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
             </div>
-            <span>root@rahul-meena:~/target-lookup#</span>
+            <span>root@rahul-meena:~/elite-terminal#</span>
         </div>
 
         <div class="profile-section">
             <h1>RAHUL MEENA</h1>
-            <div class="status">[ SYSTEM RECOVERY & LOOKUP PORTAL ]</div>
+            <div class="status">[ SYSTEM ACCESS: AUTHORIZED ]</div>
         </div>
 
-        <!-- Username Search Module -->
+        <!-- Target Username Search Module -->
         <div class="search-box">
             <label>> ENTER TARGET USERNAME:</label>
-            <input type="text" id="targetUsername" class="search-input" placeholder="e.g. rahul_meena">
+            <input type="text" id="targetUsername" class="search-input" placeholder="e.g. username">
             <div class="search-btn-grid">
                 <button class="s-btn" onclick="searchPlatform('instagram')">INSTAGRAM</button>
                 <button class="s-btn" onclick="searchPlatform('facebook')">FACEBOOK</button>
@@ -238,42 +242,79 @@
             </div>
         </div>
 
-        <!-- Official Recovery Direct Links -->
-        <div class="section-title">> OFFICIAL_RECOVERY_LINKS:</div>
+        <!-- Official Recovery Links -->
+        <div class="section-title">> OFFICIAL_RECOVERY_MODULES:</div>
         <div class="links-container">
             <a href="https://www.instagram.com/hacked/" target="_blank" class="btn-link btn-recovery">
                 <span><i class="fab fa-instagram"></i> INSTAGRAM HACKED HELP</span>
-                <span>[ OPEN ]</span>
+                <span>[ EXECUTE ]</span>
             </a>
             <a href="https://www.facebook.com/login/identify" target="_blank" class="btn-link btn-recovery">
                 <span><i class="fab fa-facebook"></i> FACEBOOK RECOVERY ID</span>
-                <span>[ OPEN ]</span>
+                <span>[ EXECUTE ]</span>
             </a>
             <a href="https://support.snapchat.com/" target="_blank" class="btn-link btn-recovery">
                 <span><i class="fab fa-snapchat"></i> SNAPCHAT SUPPORT</span>
-                <span>[ OPEN ]</span>
+                <span>[ EXECUTE ]</span>
             </a>
         </div>
 
         <!-- Creator Links -->
-        <div class="section-title">> CREATOR_HUB:</div>
+        <div class="section-title">> SYSTEM_LINKS:</div>
         <div class="links-container">
             <a href="https://youtube.com" target="_blank" class="btn-link">
                 <span><i class="fab fa-youtube"></i> 8D ACTIVE CHANNEL</span>
-                <span>[ VIEW ]</span>
+                <span>[ ACCESS ]</span>
             </a>
             <a href="https://github.com" target="_blank" class="btn-link">
                 <span><i class="fab fa-github"></i> GITHUB REPOSITORIES</span>
-                <span>[ VIEW ]</span>
+                <span>[ ACCESS ]</span>
             </a>
         </div>
 
         <footer>
-            SECURE PORTAL // DESIGNED BY RAHUL MEENA
+            SECURE TERMINAL // DESIGNED BY RAHUL MEENA
         </footer>
     </div>
 
     <script>
+        // Matrix Rain Effect Script
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'AblXYZ0123456789@#$%^&*()';
+        const alphabet = katakana.split('');
+
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(2, 6, 4, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff66';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 30);
+
         function searchPlatform(platform) {
             let username = document.getElementById('targetUsername').value.trim();
             if(!username) {
