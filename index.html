@@ -1,418 +1,593 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahul Meena | Elite Cyber Terminal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Share Tech Mono', monospace;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        body {
-            background-color: #000000;
-            color: #ff3333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overflow-x: hidden;
-            position: relative;
-        }
+<title>CYBER RECOVERY // ACCESS</title>
 
-        /* Red & Orange Matrix Rain Canvas Background */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.45;
-            pointer-events: none;
-        }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-        .terminal-box {
-            background: rgba(12, 2, 2, 0.96);
-            border: 2px solid #ff3333;
-            max-width: 620px;
-            width: 100%;
-            padding: 25px;
-            border-radius: 6px;
-            box-shadow: 0 0 50px rgba(255, 51, 51, 0.7), inset 0 0 25px rgba(255, 51, 51, 0.25);
-            position: relative;
-            z-index: 2;
-            animation: plasma-glitch 2s infinite alternate;
-        }
+body{
+  background:#020403;
+  color:#00ff66;
+  font-family:"Courier New",monospace;
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-        @keyframes plasma-glitch {
-            0% { border-color: #ff3333; box-shadow: 0 0 40px rgba(255, 51, 51, 0.6); }
-            50% { border-color: #ff6600; box-shadow: 0 0 70px rgba(255, 102, 0, 0.9); }
-            100% { border-color: #ff3333; box-shadow: 0 0 40px rgba(255, 51, 51, 0.6); }
-        }
+/* Matrix background */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  opacity:.12;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      #00ff66 3px
+    );
+}
 
-        .terminal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px dashed #ff3333;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            color: #ff3333;
-        }
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at center,
+      rgba(0,255,102,.08),
+      transparent 55%);
+  pointer-events:none;
+}
 
-        .dots {
-            display: flex;
-            gap: 6px;
-        }
+.container{
+  width:92%;
+  max-width:1100px;
+  margin:auto;
+}
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
+/* Header */
 
-        .dot-red { background: #ff5f56; box-shadow: 0 0 10px #ff5f56; }
-        .dot-yellow { background: #ffbd2e; box-shadow: 0 0 10px #ffbd2e; }
-        .dot-green { background: #27c93f; box-shadow: 0 0 10px #27c93f; }
+header{
+  text-align:center;
+  padding:55px 10px 35px;
+}
 
-        .profile-section {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.logo{
+  font-size:14px;
+  letter-spacing:4px;
+  color:#00ff66;
+}
 
-        h1 {
-            font-size: 28px;
-            letter-spacing: 4px;
-            margin-bottom: 5px;
-            color: #ffffff;
-            text-shadow: 0 0 15px #ff3333, 0 0 30px #ff0000;
-        }
+h1{
+  font-size:clamp(32px,7vw,64px);
+  margin:18px 0 10px;
+  text-shadow:
+    0 0 5px #00ff66,
+    0 0 20px #00ff66;
+}
 
-        .status {
-            font-size: 13px;
-            color: #00e5ff;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px #00e5ff;
-        }
+.subtitle{
+  color:#8affb4;
+  line-height:1.6;
+}
 
-        /* Attack Vector / Search Box Styles */
-        .search-box {
-            background: rgba(255, 51, 51, 0.06);
-            border: 1px solid #ff3333;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            box-shadow: inset 0 0 15px rgba(255, 51, 51, 0.2);
-        }
+/* Terminal */
 
-        .search-box label {
-            display: block;
-            font-size: 13px;
-            color: #ff6600;
-            margin-bottom: 8px;
-        }
+.terminal{
+  background:#050907;
+  border:1px solid #00ff66;
+  border-radius:14px;
+  padding:18px;
+  margin:25px auto 35px;
+  box-shadow:
+    0 0 15px rgba(0,255,102,.15);
+}
 
-        .search-input {
-            width: 100%;
-            background: #000;
-            border: 1px solid #ff3333;
-            color: #ff3333;
-            padding: 12px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 15px;
-            border-radius: 4px;
-            outline: none;
-            margin-bottom: 12px;
-            box-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
-        }
+.terminal span{
+  color:#00ff66;
+}
 
-        .search-input:focus {
-            box-shadow: 0 0 25px #ff6600;
-            border-color: #ff6600;
-        }
+.cursor{
+  display:inline-block;
+  width:8px;
+  height:16px;
+  background:#00ff66;
+  animation:blink .7s infinite;
+}
 
-        .search-btn-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
+@keyframes blink{
+  50%{opacity:0}
+}
 
-        .s-btn {
-            background: rgba(255, 51, 51, 0.15);
-            border: 1px solid #ff3333;
-            color: #ff3333;
-            padding: 10px 5px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: 0.3s;
-            text-align: center;
-        }
+/* Cards */
 
-        .s-btn:hover {
-            background: #ff6600;
-            color: #000;
-            border-color: #ff6600;
-            box-shadow: 0 0 25px #ff6600;
-        }
+.services{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
 
-        .section-title {
-            font-size: 14px;
-            color: #ff6600;
-            margin: 20px 0 10px 0;
-            border-bottom: 1px dashed rgba(255, 102, 0, 0.4);
-            padding-bottom: 5px;
-            letter-spacing: 2px;
-        }
+.card{
+  background:rgba(3,10,6,.92);
+  border:1px solid #087a38;
+  border-radius:15px;
+  padding:24px;
+  transition:.25s;
+}
 
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#00ff66;
+  box-shadow:
+    0 0 20px rgba(0,255,102,.2);
+}
 
-        .btn-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(0, 0, 0, 0.85);
-            color: #ff3333;
-            text-decoration: none;
-            padding: 12px 15px;
-            border: 1px solid #ff3333;
-            border-radius: 4px;
-            font-size: 14px;
-            letter-spacing: 1px;
-            transition: all 0.3s ease-in-out;
-        }
+.icon{
+  font-size:40px;
+  margin-bottom:12px;
+}
 
-        .btn-link:hover {
-            background: #ff3333;
-            color: #000000;
-            box-shadow: 0 0 25px #ff3333;
-        }
+.card h2{
+  margin-bottom:10px;
+}
 
-        .btn-recovery {
-            border-color: #ff6600;
-            color: #ff6600;
-        }
+.card p{
+  color:#83b996;
+  line-height:1.5;
+  margin-bottom:18px;
+}
 
-        .btn-recovery:hover {
-            background: #ff6600;
-            color: #000000;
-            box-shadow: 0 0 25px #ff6600;
-        }
+.btn{
+  display:inline-block;
+  width:100%;
+  padding:12px;
+  text-align:center;
+  text-decoration:none;
+  color:#001b09;
+  background:#00ff66;
+  border:1px solid #00ff66;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
 
-        /* Hacker Fullscreen Breach Simulation Overlay */
-        #breachOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 0, 0, 0.98);
-            z-index: 9999;
-            display: none;
-            flex-direction: column;
-            padding: 30px;
-            color: #ff3333;
-            font-family: 'Share Tech Mono', monospace;
-            overflow: hidden;
-        }
+.btn:hover{
+  background:#001b09;
+  color:#00ff66;
+  box-shadow:0 0 15px #00ff66;
+}
 
-        .breach-header {
-            font-size: 22px;
-            color: #ff0000;
-            text-shadow: 0 0 15px #ff0000;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #ff0000;
-            padding-bottom: 10px;
-        }
+/* Search */
 
-        .breach-logs {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #ff6666;
-            white-space: pre-wrap;
-        }
+.search{
+  margin:35px 0;
+  padding:25px;
+  background:#050907;
+  border:1px solid #087a38;
+  border-radius:15px;
+}
 
-        footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 11px;
-            color: #ff6600;
-            letter-spacing: 1px;
-        }
-    </style>
+.search h2{
+  margin-bottom:8px;
+}
+
+.search p{
+  color:#83b996;
+  margin-bottom:18px;
+}
+
+select,
+input{
+  width:100%;
+  padding:13px;
+  margin-bottom:12px;
+  background:#020403;
+  color:#00ff66;
+  border:1px solid #087a38;
+  border-radius:8px;
+  outline:none;
+  font-family:inherit;
+}
+
+input:focus,
+select:focus{
+  border-color:#00ff66;
+  box-shadow:0 0 10px rgba(0,255,102,.2);
+}
+
+.result{
+  margin-top:18px;
+  padding:16px;
+  border:1px dashed #00ff66;
+  display:none;
+}
+
+/* Security */
+
+.security{
+  margin:30px 0;
+  padding:18px;
+  border-left:4px solid #00ff66;
+  background:#061009;
+  color:#8fbd9d;
+  line-height:1.6;
+}
+
+footer{
+  text-align:center;
+  padding:35px 10px;
+  color:#39734d;
+  font-size:13px;
+}
+
+@media(max-width:600px){
+  header{
+    padding-top:40px;
+  }
+
+  .terminal{
+    font-size:13px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Red-Orange Matrix Rain Background -->
-    <canvas id="matrixCanvas"></canvas>
+<div class="container">
 
-    <!-- Breach Simulation Overlay Screen -->
-    <div id="breachOverlay">
-        <div class="breach-header">[!] EXPLOIT ATTEMPT #7734 // SYSTEM BREACH INITIATED [!]</div>
-        <div class="breach-logs" id="breachLogs"></div>
-    </div>
+<header>
 
-    <div class="terminal-box">
-        <div class="terminal-header">
-            <div class="dots">
-                <span class="dot dot-red"></span>
-                <span class="dot dot-yellow"></span>
-                <span class="dot dot-green"></span>
-            </div>
-            <span>root@rahul-meena:~/elite-terminal#</span>
-        </div>
+<div class="logo">
+[ CYBER RECOVERY SYSTEM // ONLINE ]
+</div>
 
-        <div class="profile-section">
-            <h1>RAHUL MEENA</h1>
-            <div class="status">[ SYSTEM ACCESS: COMPROMISED ]</div>
-        </div>
+<h1>ACCOUNT RECOVERY</h1>
 
-        <!-- Target Username Attack Vector Module -->
-        <div class="search-box">
-            <label>> ENTER TARGET USERNAME:</label>
-            <input type="text" id="targetUsername" class="search-input" placeholder="e.g. target_username">
-            <div class="search-btn-grid">
-                <button class="s-btn" onclick="triggerBreach('INSTAGRAM')">INSTAGRAM</button>
-                <button class="s-btn" onclick="triggerBreach('FACEBOOK')">FACEBOOK</button>
-                <button class="s-btn" onclick="triggerBreach('SNAPCHAT')">SNAPCHAT</button>
-            </div>
-        </div>
+<p class="subtitle">
+Secure assistance for compromised social accounts
+</p>
 
-        <!-- Official Recovery Modules -->
-        <div class="section-title">> OFFICIAL_RECOVERY_MODULES:</div>
-        <div class="links-container">
-            <a href="https://www.instagram.com/hacked/" target="_blank" class="btn-link btn-recovery">
-                <span><i class="fab fa-instagram"></i> INSTAGRAM HACKED HELP</span>
-                <span>[ EXECUTE ]</span>
-            </a>
-            <a href="https://www.facebook.com/login/identify" target="_blank" class="btn-link btn-recovery">
-                <span><i class="fab fa-facebook"></i> FACEBOOK RECOVERY ID</span>
-                <span>[ EXECUTE ]</span>
-            </a>
-            <a href="https://support.snapchat.com/" target="_blank" class="btn-link btn-recovery">
-                <span><i class="fab fa-snapchat"></i> SNAPCHAT SUPPORT</span>
-                <span>[ EXECUTE ]</span>
-            </a>
-        </div>
+</header>
 
-        <!-- System Links -->
-        <div class="section-title">> SYSTEM_LINKS:</div>
-        <div class="links-container">
-            <a href="https://youtube.com" target="_blank" class="btn-link">
-                <span><i class="fab fa-youtube"></i> 8D ACTIVE CHANNEL</span>
-                <span>[ ACCESS ]</span>
-            </a>
-            <a href="https://github.com" target="_blank" class="btn-link">
-                <span><i class="fab fa-github"></i> GITHUB REPOSITORIES</span>
-                <span>[ ACCESS ]</span>
-            </a>
-        </div>
 
-        <footer>
-            WARNING: AUTHORIZED ACCESS ONLY - PROSECUTION IS CERTAIN // DESIGNED BY RAHUL MEENA
-        </footer>
-    </div>
+<div class="terminal">
 
-    <script>
-        // Red-Orange Matrix Rain Simulation
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
+<span>root@recovery:~$</span>
+&nbsp; system_check --status
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+<br><br>
 
-        const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()+-<>/?~';
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
+<span>[+]</span> Recovery System: ONLINE
+<br>
+<span>[+]</span> Security Layer: ACTIVE
+<br>
+<span>[+]</span> Supported Platforms: 04
+<br>
+<span>[+]</span> Unauthorized Access: BLOCKED
 
-        const drops = [];
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
+<br><br>
 
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+<span>root@recovery:~$</span>
+<span class="cursor"></span>
 
-            // Alternating Red & Orange Matrix Rain Glow
-            ctx.fillStyle = Math.random() > 0.5 ? '#ff3333' : '#ff6600';
-            ctx.font = fontSize + 'px monospace';
+</div>
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 33);
+<!-- RECOVERY SERVICES -->
 
-        // Real-Time System Breach / ID Compromised Simulation
-        function triggerBreach(platform) {
-            let username = document.getElementById('targetUsername').value.trim();
-            if(!username) {
-                alert("ERROR: Target username required for exploit execution!");
-                return;
-            }
+<section class="services">
 
-            const overlay = document.getElementById('breachOverlay');
-            const logsBox = document.getElementById('breachLogs');
-            overlay.style.display = 'flex';
-            
-            let logs = [
-                `> Initializing attack vector on ${platform} mainframe for target: @${username}...`,
-                `> Bypassing SSL encryption tunnels and firewall nodes...`,
-                `> Injecting remote payload into active session tokens...`,
-                `> [CRITICAL SUCCESS] Target packet captured: @${username}`,
-                `> Extracting user credentials, cookies, and database keys...`,
-                `> WARNING: SYSTEM INTEGRITY COMPROMISED // ID COMPROMISED!`,
-                `> Redirecting to secure recovery gateway in 3 seconds...`
-            ];
+<div class="card">
 
-            let currentLog = 0;
-            logsBox.innerHTML = "";
+<div class="icon">📸</div>
 
-            function addLogLine() {
-                if(currentLog < logs.length) {
-                    logsBox.innerHTML += logs[currentLog] + "\n";
-                    currentLog++;
-                    setTimeout(addLogLine, 500);
-                } else {
-                    setTimeout(() => {
-                        overlay.style.display = 'none';
-                        if(platform === 'INSTAGRAM') {
-                            window.open(`https://www.instagram.com/${username}/`, '_blank');
-                        } else if(platform === 'FACEBOOK') {
-                            window.open(`https://www.facebook.com/public/${username}`, '_blank');
-                        } else if(platform === 'SNAPCHAT') {
-                            window.open(`https://www.snapchat.com/add/${username}`, '_blank');
-                        }
-                    }, 1200);
-                }
-            }
-            addLogLine();
-        }
-    </script>
+<h2>Instagram</h2>
+
+<p>
+Hacked या login problem होने पर
+official Instagram recovery process शुरू करें।
+</p>
+
+<a
+class="btn"
+href="https://www.instagram.com/hacked/"
+target="_blank"
+rel="noopener">
+
+[ START RECOVERY ]
+
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">📘</div>
+
+<h2>Facebook</h2>
+
+<p>
+Compromised Facebook account के लिए
+official recovery process खोलें।
+</p>
+
+<a
+class="btn"
+href="https://www.facebook.com/hacked"
+target="_blank"
+rel="noopener">
+
+[ START RECOVERY ]
+
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">💬</div>
+
+<h2>WhatsApp</h2>
+
+<p>
+WhatsApp account access problem के लिए
+official support information देखें।
+</p>
+
+<a
+class="btn"
+href="https://faq.whatsapp.com/"
+target="_blank"
+rel="noopener">
+
+[ OPEN SUPPORT ]
+
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">👻</div>
+
+<h2>Snapchat</h2>
+
+<p>
+Compromised Snapchat account के लिए
+official support process खोलें।
+</p>
+
+<a
+class="btn"
+href="https://help.snapchat.com/"
+target="_blank"
+rel="noopener">
+
+[ OPEN SUPPORT ]
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- USERNAME SEARCH -->
+
+<section class="search">
+
+<h2>🔎 PUBLIC PROFILE SEARCH</h2>
+
+<p>
+Username डालकर public profile खोलें।
+</p>
+
+<select id="platform">
+
+<option value="instagram">
+Instagram
+</option>
+
+<option value="facebook">
+Facebook
+</option>
+
+<option value="snapchat">
+Snapchat
+</option>
+
+</select>
+
+
+<input
+id="username"
+type="text"
+placeholder="Enter username..."
+autocomplete="off"
+>
+
+
+<button
+class="btn"
+onclick="searchProfile()">
+
+[ SEARCH PROFILE ]
+
+</button>
+
+
+<div
+id="result"
+class="result">
+</div>
+
+</section>
+
+
+<!-- SECURITY NOTICE -->
+
+<div class="security">
+
+<strong>🛡 SECURITY NOTICE</strong>
+
+<br><br>
+
+यह tool password, OTP, recovery code,
+session cookie या private information collect नहीं करता।
+
+<br><br>
+
+Account recovery केवल account owner की
+permission और official platform recovery
+process के माध्यम से करें।
+
+</div>
+
+
+<footer>
+
+CYBER RECOVERY SYSTEM © 2026
+
+<br><br>
+
+AUTHORIZED RECOVERY ASSISTANCE ONLY
+
+</footer>
+
+</div>
+
+
+<script>
+
+function escapeHTML(text){
+
+return text.replace(/[&<>"']/g,function(m){
+
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m];
+
+});
+
+}
+
+
+function searchProfile(){
+
+const platform =
+document.getElementById("platform").value;
+
+const username =
+document.getElementById("username")
+.value.trim();
+
+const result =
+document.getElementById("result");
+
+
+if(!username){
+
+alert("Username enter करें");
+
+return;
+
+}
+
+
+let url="";
+
+let name="";
+
+
+if(platform==="instagram"){
+
+url=
+"https://www.instagram.com/"
++
+encodeURIComponent(username);
+
+name="Instagram";
+
+}
+
+
+if(platform==="facebook"){
+
+url=
+"https://www.facebook.com/"
++
+encodeURIComponent(username);
+
+name="Facebook";
+
+}
+
+
+if(platform==="snapchat"){
+
+url=
+"https://www.snapchat.com/add/"
++
+encodeURIComponent(username);
+
+name="Snapchat";
+
+}
+
+
+result.style.display="block";
+
+result.innerHTML=`
+
+<strong>[ PROFILE LINK GENERATED ]</strong>
+
+<br><br>
+
+Platform:
+${name}
+
+<br>
+
+Username:
+@${escapeHTML(username)}
+
+<br><br>
+
+<a
+class="btn"
+href="${url}"
+target="_blank"
+rel="noopener">
+
+[ OPEN PUBLIC PROFILE ]
+
+</a>
+
+`;
+
+}
+
+</script>
 
 </body>
 </html>
